@@ -1,0 +1,32 @@
+				    	.data
+			  	  	dizi:	  	.space   144
+			  	  	satir:		.word    0
+			    		sutun:		.word    0
+			  	  	b_adres:	.word
+			    		adres:		.word
+				    	hesap_d:	.word
+            
+			  	  	.text
+for:			  	la        b_adres, dizi
+			  	  	move     adres, b_adres
+		  	  		beq      sutun, 6, satir_artir
+		  		  	beq      satir, sutun, bir_yap
+		  		  	move     [adres], 0
+		  	  		add      sutun, sutun, 1
+		  	  		mul      hesap_d, satir, 6
+		  	  		add      hesap_d, hesap_d, sutun
+		  	  		mul      hesap_d, hesap_d, 4
+		  		  	add      adres, b_adres, hesap_d
+		  		  	b        for
+bir_yap:	  	move     [adres], 1
+				    	add      sutun, sutun, 1 
+			  	  	mul      hesap_d, satir, 6
+			  	  	add      hesap_d, hesap_d, sutun
+				    	mul      hesap_d, hesap_d, 4
+			  	  	add      adres, b_adres, hesap_d
+			  	  	b        for
+satir_artir:	beq      satir, 5, son
+				    	move     sutun, 0
+				     	add      satir, satir, 1 
+			  	  	b        for
+son:		  		done
